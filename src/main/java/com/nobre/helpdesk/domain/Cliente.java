@@ -3,8 +3,13 @@ package com.nobre.helpdesk.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente extends Pessoa{
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Cliente extends Pessoa{
+	private static final long serialVersionUID = 1L;
+	
 	private List<Chamado> chamados = new ArrayList<>();
 
 	public Cliente() {
