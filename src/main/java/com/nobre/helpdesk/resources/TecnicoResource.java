@@ -19,7 +19,7 @@ public class TecnicoResource {
 	@Autowired
 	private TecnicoService service;
 	
-	@GetMapping(value = "/id")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<Tecnico> findById(@PathVariable Integer id){
 		Tecnico obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
