@@ -14,7 +14,7 @@ import com.nobre.helpdesk.domain.enums.Perfil;
 public class Cliente extends Pessoa{
 	private static final long serialVersionUID = 1L;
 	
-	@JsonIgnore
+	@JsonIgnore //para proteger da serialização / Para ignorar propriedades individuais
 	@OneToMany(mappedBy = "cliente")
 	private List<Chamado> chamados = new ArrayList<>();
 
