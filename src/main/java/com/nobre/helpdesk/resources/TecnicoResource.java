@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nobre.helpdesk.domain.Tecnico;
 import com.nobre.helpdesk.domain.dtos.TecnicoDTO;
 import com.nobre.helpdesk.services.TecnicoService;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping(value = "/tecnicos")
@@ -24,5 +28,12 @@ public class TecnicoResource {
 	public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id){
 		Tecnico obj = service.findById(id);
 		return ResponseEntity.ok().body(new TecnicoDTO(obj));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<TecnicoDTO>> findAll(){
+		List<Tecnico> list = service.findAll();
+		List<TecnicoDTO> listDTO = list.stream().map(obj -> new TecnicoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
