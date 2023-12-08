@@ -16,6 +16,7 @@ public class Cliente extends Pessoa{
 	private static final long serialVersionUID = 1L;
 	
 	@JsonIgnore // para proteger da serialização - Para ignorar propriedades individuais
+
 	@OneToMany(mappedBy = "cliente")
 	private List<Chamado> chamados = new ArrayList<>();
 
