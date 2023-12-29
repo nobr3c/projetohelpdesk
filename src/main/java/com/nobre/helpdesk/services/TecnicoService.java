@@ -6,7 +6,11 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.stereotype.Service;
 
 import com.nobre.helpdesk.domain.Pessoa;
@@ -29,7 +33,7 @@ public class TecnicoService {
 	
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto Não Encontrado: " + id));
+		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto Não Encontrado! Id: " + id));
 	}
 	
 	public List<Tecnico> findAll(){
@@ -42,7 +46,7 @@ public class TecnicoService {
 		validaPorCpfEEmail(objDTO);
 		Tecnico newObj = new Tecnico(objDTO);
 		return repository.save(newObj);
-	}
+    
 	
 	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
 		objDTO.setId(id);
@@ -73,5 +77,4 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
 		}
 	}
-		
 }
